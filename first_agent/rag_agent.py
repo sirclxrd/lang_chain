@@ -1,10 +1,9 @@
 import requests 
-from langchain.tools import tool, ToolRuntime
 from langchain_ollama import ChatOllama
-from langchain_community.vectorstores import FAISS
 from langchain_ollama import OllamaEmbeddings
 from langchain_core.tools import create_retriever_tool
 from langchain.agents import create_agent
+from langchain_qdrant import QdrantVectorStore
 
 embeddings = OllamaEmbeddings(
     model="nomic-embed-text:latest" 
@@ -18,33 +17,33 @@ llm = ChatOllama(
 texts = [
     'I love apples.',
     'I enjoy oranges.',
-    'I think pears tast very good.',
-    'I hate banans',
+    'I think pears taste very good.',
+    'I hate bananas',
     'I dislike raspberries.',
-    'I despite mangos.',
+    'I despise mangos.',
     'I love Linux.',
     'I hate Windows'
 ]
 
-vector_store = FAISS.from_texts(texts, embedding=embeddings)
-
-#print(vector_store.similarity_search('I love fruit', k=3))
+# Qdrant Docker test instead of the classic FAISS.
+vector_store = QdrantVectorStore.from_texts(
+    texts,
+    embedding=embeddings,
+    url="http://localhost:6333",
+    collection_name="fruit_collection"
+)
 
 retriever = vector_store.as_retriever(search_kwargs={"k": 3})
 
 retriever_tool = create_retriever_tool(
     retriever=retriever,
     name='kb_search',
-    description='Search the small product / fruit knowledge base for information.')
+    description='Search the small product / fruit knowledge base for information.'
+)
 
 agent = create_agent(
-    model = llm,
-    tools = [retriever_tool],
-    system_prompt= ("You are a helpful assistant that provides information about fruits and operating systems,"
-    "first call the kb_search tool to retrieve context, then answer succintly. Maybe you have to use it" \
-    "multiple times before answering.",
-    )
-
+    model=llm,
+    tools=[retriever_tool]
 )
 
 result = agent.invoke({

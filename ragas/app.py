@@ -90,7 +90,7 @@ retriever = vector_store.as_retriever(
 retriever_tool = create_retriever_tool(
     retriever=retriever,
     name='kb_search',
-    description='Search the small product / fruit knowledge base for information.'
+    description='Retrieve context based on question'
 )
 
 agent = create_agent(

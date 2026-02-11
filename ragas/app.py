@@ -23,7 +23,11 @@ from ragas.metrics import (
 )
 
 # faithfulness = risposta rispetto al contesto
+# answer_relevancy = risposta rispetto all'input, quanto bene la risposta matcha l'intento dell'input
 # answer_correctness = risposta rispetto al ground truh
+# context_precision = misura l'abilita del'retriever di ottenere chunk rilevant rispetto all'input
+# context_recall = quanti documenti rilevanti sono stati scelti rispetto a tutti i documenti rilevanti
+
 # i valori delle formule li dà un'altro LLM più grande
 # fine-tunato per questo
 

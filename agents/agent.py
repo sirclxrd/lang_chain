@@ -73,5 +73,13 @@ response = agent.invoke({
     context = Context(user_id = 'DEF456')
 )
 
+# PROVA AD INVOCARE COSì
+response = agent.invoke(
+[
+        {'role': 'user', 'content': 'hi'}
+    ],
+
+)
+
 #print(response)
 print(response['messages'][-1].content)

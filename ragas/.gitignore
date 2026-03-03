@@ -1,0 +1,71 @@
+# Ignore runtime artifacts and local secrets for the ragas agent
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Byte-compiled / optimized / DLL files
+*.so
+*.dylib
+*.dll
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.env/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and runtime traces
+*.log
+last_llm_used.txt
+ragas/last_llm_used.txt
+
+# Environment and secrets
+.env
+.env.*
+secrets.json
+credentials.json
+
+# Test/coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# mypy / pipenv
+.mypy_cache/
+Pipfile.lock
+
+# Requests / http caches
+.requests_cache/
+
+# Optional: Ollama model data or large checkouts (uncomment if present)
+# .ollama/
+
+# Keep this file in repo root to exclude the above when committing from project
+
+# Files specifici dell'agente meteo (creati durante lo sviluppo) - ignorali se non vuoi pusharli
+weather_agent.py
+weather_gui.py
+test_agent.py
+test_ollama.py
+requirements.txt
+README.md
